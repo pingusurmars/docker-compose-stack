@@ -21,6 +21,7 @@ services:
     restart: unless-stopped
     networks:
       ctc_private:
+        ipv4_address: 172.1.0.2
         ipv6_address: fd00:CA7:F00D::2
       bridge: {}
   nginx-proxy-manager:
@@ -37,6 +38,7 @@ services:
       - ./letsencrypt:/etc/letsencrypt
     networks:
       ctc_private:
+        ipv4_address: 172.1.0.3
         ipv6_address: fd00:CA7:F00D::3
       bridge: {}
   speedtest-tracker:
@@ -57,6 +59,7 @@ services:
       - /etc/localtime:/etc/localtime
     networks:
       ctc_private:
+        ipv4_address: 172.1.0.4
         ipv6_address: fd00:CA7:F00D::4
       bridge: {}
   portainer:
@@ -70,6 +73,7 @@ services:
       - portainer_data:/data
     networks:
       ctc_private:
+        ipv4_address: 172.1.0.1
         ipv6_address: fd00:CA7:F00D::1
       bridge: {}
 networks:
@@ -83,11 +87,6 @@ networks:
       driver: default
       config:
         - subnet: 172.1.0.0/16
-          aux_addresses:
-            portainer: 172.1.0.1
-            pihole_dns: 172.1.0.2
-            nginx-proxy-manager: 172.1.0.3
-            speedtest-tracker: 172.1.0.4
         - subnet: fc00:CA7:F00D::/80
   bridge:
     external: true
