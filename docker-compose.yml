@@ -13,7 +13,7 @@ services:
     - "67:67/udp"
     environment:
       TZ: 'Europe/Paris'
-      FTLCONF_webserver_api_password: ${PIHOLE_ADMIN_PASSWORD} # TODO: If you're pulling this from GitHub, change this! (will still work but it's insecure)
+      FTLCONF_webserver_api_password: ${PIHOLE_ADMIN_PASSWORD} # Don't forget to set it in the .ENV!!
     volumes:
       - './etc-pihole/:/etc/pihole/'
     cap_add:
@@ -50,7 +50,7 @@ services:
       - PUID=1000
       - PGID=1000
       - DB_CONNECTION=sqlite
-      - APP_KEY=${ST_APP_KEY} # TODO: Change this, container does not work without it! (if you see this on GitHub, this is not used in prod!!)
+      - APP_KEY=${ST_APP_KEY} # Same as the Pihole Password!!
     volumes:
       - /etc/speedtest-tracker/config:/config
       - /etc/speedtest-tracker/config/keys:/config/key
