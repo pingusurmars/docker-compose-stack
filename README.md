@@ -2,7 +2,8 @@
 What I currently have deployed with docker on my home "server" (in quotation marks because it's just a repurposed old PC)
 
 # The Machine itself
-![neofetch image](https://github.com/pingusurmars/my-docker-stack/blob/master/neofetch.png?raw=true)
+![neofetch image](https://github.com/pingusurmars/my-docker-stack/blob/master/neofetch.png?raw=true)<br>
+Nothing fancy, just an old pc doing the stuff I need it to do, might upgrade soon if I really need to (which is likely soon)
 
 # Summary
 Here's a list of what's running and why (<ins>underlined</ins> = not running inside docker but could've)
