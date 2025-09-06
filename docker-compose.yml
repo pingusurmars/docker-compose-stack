@@ -91,6 +91,8 @@ networks:
             speedtest-tracker: 172.1.0.4
   bridge:
     external: true
+volumes:
+  portainer_data:
 
 
       
