@@ -73,7 +73,8 @@ services:
         ipv6_address: fd00:CA7:F00D::1
       bridge: {}
 networks:
-  ctc_private: # If it isn't clear enough from the config, ctc = Container to Container and private = no outside access
+  # If it isn't clear enough from the config, ctc = Container to Container and private = no outside access
+  ctc_private: 
     driver: bridge
     scope: local
     attachable: false
