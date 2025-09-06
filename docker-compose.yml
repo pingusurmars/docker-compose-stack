@@ -71,6 +71,7 @@ networks:
         - subnet: fc00:CA7:F00D::/80
   internet:
     driver: bridge
+    enable_ipv6: true
 volumes:
   portainer_data:
 
