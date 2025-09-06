@@ -76,7 +76,6 @@ networks:
   # If it isn't clear enough from the config, ctc = Container to Container and private = no outside access
   ctc_private: 
     driver: bridge
-    scope: local
     attachable: false
     enable_ipv6: true
     internal: true
