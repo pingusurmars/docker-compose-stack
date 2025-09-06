@@ -88,7 +88,7 @@ networks:
             pihole_dns: 172.1.0.2
             nginx-proxy-manager: 172.1.0.3
             speedtest-tracker: 172.1.0.4
-        - subnet: fd00:CA7:F00D::/80
+        - subnet: fc00:CA7:F00D::/80
   bridge:
     external: true
 volumes:
