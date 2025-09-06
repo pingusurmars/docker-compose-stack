@@ -20,10 +20,8 @@ services:
       - NET_ADMIN # Needed if using the DHCP server
     restart: unless-stopped
     networks:
-      ctc_private:
-        ipv4_address: 172.1.0.2
-        ipv6_address: fd00:CA7:F00D::2
-      bridge: {}
+      - ctc_private
+      - bridge
   nginx-proxy-manager:
     image: 'jc21/nginx-proxy-manager:latest'
     restart: unless-stopped
@@ -37,10 +35,8 @@ services:
       - ./data:/data
       - ./letsencrypt:/etc/letsencrypt
     networks:
-      ctc_private:
-        ipv4_address: 172.1.0.3
-        ipv6_address: fd00:CA7:F00D::3
-      bridge: {}
+      - ctc_private
+      - bridge
   speedtest-tracker:
     image: lscr.io/linuxserver/speedtest-tracker:latest
     restart: unless-stopped
@@ -58,10 +54,8 @@ services:
       - /etc/speedtest-tracker/config/keys:/config/key
       - /etc/localtime:/etc/localtime
     networks:
-      ctc_private:
-        ipv4_address: 172.1.0.4
-        ipv6_address: fd00:CA7:F00D::4
-      bridge: {}
+      - ctc_private
+      - bridge
   portainer:
     image: portainer/portainer-ce:latest
     container_name: portainer
@@ -72,10 +66,8 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock
       - portainer_data:/data
     networks:
-      ctc_private:
-        ipv4_address: 172.1.0.1
-        ipv6_address: fd00:CA7:F00D::1
-      bridge: {}
+      - ctc_private
+      - bridge
 networks:
   # If it isn't clear enough from the config, ctc = Container to Container and private = no outside access
   ctc_private: 
