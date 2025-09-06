@@ -56,18 +56,7 @@ services:
     networks:
       - ctc_private
       - internet
-  portainer:
-    image: portainer/portainer-ce:latest
-    container_name: portainer
-    ports:
-      - "9443:9443"
-      - "8000:8000"
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock
-      - portainer_data:/data
-    networks:
-      - ctc_private
-      - internet
+# THERE USED TO BE PORTAINER HERE BUT IT WAS REMOVED DUE TO IT NOT BEING ABLE TO UPDATE THE STACK VIA GIT AFTER DEPLOYING, PLEASE DEPLOY IT BEFORE MANUANLLY!!
 networks:
   # If it isn't clear enough from the config, ctc = Container to Container and private = no outside access
   ctc_private: 
