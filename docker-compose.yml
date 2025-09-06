@@ -89,4 +89,8 @@ networks:
             pihole_dns: 172.1.0.2
             nginx-proxy-manager: 172.1.0.3
             speedtest-tracker: 172.1.0.4
+  bridge:
+    external: true
+
+
       
