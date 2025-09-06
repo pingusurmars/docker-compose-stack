@@ -1,0 +1,92 @@
+services:
+  pihole:
+    container_name: pihole_dns
+    image: pihole/pihole:latest
+    ports:
+    # DNS Server ports
+    - "53:53/tcp"
+    - "53:53/udp"
+    # Web Interface ports
+    - "8800:80/tcp"
+    - "4443:443/tcp"
+    # DHCP support
+    - "67:67/udp"
+    environment:
+      TZ: 'Europe/Paris'
+      FTLCONF_webserver_api_password: 'NOYOUWILLNOTFINDTHEPASSWORDHERE' # TODO: If you're pulling this from GitHub, change this! (will still work but it's insecure)
+    volumes:
+      - './etc-pihole/:/etc/pihole/'
+    cap_add:
+      - NET_ADMIN # Needed if using the DHCP server
+    restart: unless-stopped
+    networks:
+      ctc_private:
+        ipv6_address: fd00:CA7:F00D::2
+      bridge: {}
+  nginx-proxy-manager:
+    image: 'jc21/nginx-proxy-manager:latest'
+    restart: unless-stopped
+    ports:
+    # "NGINX" ports (it's not nginx, but you get the idea)
+      - '80:80'
+      - '443:443'
+    # Control UI
+      - '81:81'
+    volumes:
+      - ./data:/data
+      - ./letsencrypt:/etc/letsencrypt
+    networks:
+      ctc_private:
+        ipv6_address: fd00:CA7:F00D::3
+      bridge: {}
+  speedtest-tracker:
+    image: lscr.io/linuxserver/speedtest-tracker:latest
+    restart: unless-stopped
+    container_name: speedtest-tracker
+    ports:
+      - 8080:8080
+      - 8443:8443
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - DB_CONNECTION=sqlite
+      - APP_KEY=PLEASECHANGETHIS # TODO: Change this, container does not work without it! (if you see this on GitHub, this is not used in prod!!)
+    volumes:
+      - /etc/speedtest-tracker/config:/config
+      - /etc/speedtest-tracker/config/keys:/config/key
+      - /etc/localtime:/etc/localtime
+    networks:
+      ctc_private:
+        ipv6_address: fd00:CA7:F00D::4
+      bridge: {}
+  portainer:
+    image: portainer/portainer-ce:latest
+    container_name: portainer
+    ports:
+      - "9443:9443"
+      - "8000:8000"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - portainer_data:/data
+    networks:
+      ctc_private:
+        ipv6_address: fd00:CA7:F00D::1
+      bridge: {}
+networks:
+  ctc_private: # If it isn't clear enough from the config, ctc = Container to Container and private = no outside access
+    driver: bridge
+    scope: local
+    attachable: false
+    enable_ipv6: true
+    internal: true
+    ipam:
+      driver: default
+      config:
+        - subnet: 172.1.0.0/16
+        - subnet: fd00:CA7:F00D::/80
+          aux_addresses:
+            portainer: 172.1.0.1
+            pihole_dns: 172.1.0.2
+            nginx-proxy-manager: 172.1.0.3
+            speedtest-tracker: 172.1.0.4
+      
