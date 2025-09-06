@@ -83,12 +83,12 @@ networks:
       driver: default
       config:
         - subnet: 172.1.0.0/16
-        - subnet: fd00:CA7:F00D::/80
           aux_addresses:
             portainer: 172.1.0.1
             pihole_dns: 172.1.0.2
             nginx-proxy-manager: 172.1.0.3
             speedtest-tracker: 172.1.0.4
+        - subnet: fd00:CA7:F00D::/80
   bridge:
     external: true
 volumes:
