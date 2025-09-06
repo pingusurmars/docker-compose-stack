@@ -52,7 +52,7 @@ services:
       - PUID=1000
       - PGID=1000
       - DB_CONNECTION=sqlite
-      - APP_KEY=${ST_APP_KEY} # Same as the Pihole Password!!
+      - APP_KEY=${ST_APP_KEY} # Same situation as for the Pihole Password!!
     volumes:
       - /etc/speedtest-tracker/config:/config
       - /etc/speedtest-tracker/config/keys:/config/key
