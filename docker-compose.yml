@@ -21,7 +21,7 @@ services:
     restart: unless-stopped
     networks:
       - ctc_private
-      - bridge
+      - internet
   nginx-proxy-manager:
     image: 'jc21/nginx-proxy-manager:latest'
     restart: unless-stopped
@@ -36,7 +36,7 @@ services:
       - ./letsencrypt:/etc/letsencrypt
     networks:
       - ctc_private
-      - bridge
+      - internet
   speedtest-tracker:
     image: lscr.io/linuxserver/speedtest-tracker:latest
     restart: unless-stopped
@@ -55,7 +55,7 @@ services:
       - /etc/localtime:/etc/localtime
     networks:
       - ctc_private
-      - bridge
+      - internet
   portainer:
     image: portainer/portainer-ce:latest
     container_name: portainer
@@ -67,7 +67,7 @@ services:
       - portainer_data:/data
     networks:
       - ctc_private
-      - bridge
+      - internet
 networks:
   # If it isn't clear enough from the config, ctc = Container to Container and private = no outside access
   ctc_private: 
@@ -80,8 +80,8 @@ networks:
       config:
         - subnet: 172.1.0.0/16
         - subnet: fc00:CA7:F00D::/80
-  bridge:
-    external: true
+  internet:
+    driver: bridge
 volumes:
   portainer_data:
 
