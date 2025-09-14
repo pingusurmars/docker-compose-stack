@@ -15,5 +15,5 @@ Here's a list of what's running and why (<ins>underlined</ins> = not running ins
 
 <ins>I'm also including these here as they're not inside the docker compose file:<br><br></ins>
 **Mute All Discord Bot (custom made)** - Like the name implies, a Discord bot to server mute/demute everyone inside a voice channel in one go instead of manually doing it. (saves a lot of time, it's also based on the node container image)<br>
-**<ins>xmrig Proxy</ins>** - To be honest I don't have hundreds of workers mining monero, I just prefer having it to make one big worker on my pool instead of multiple with varying power.
+**<ins>xmrig Proxy</ins>** - To be honest I don't have hundreds of workers mining monero, I just prefer having it to make one big worker on my pool instead of multiple with varying power.<br>
 **Immich** - Extremely cool for backing up my phone's gallery from anywhere & has a cool UI (not included as it needed a separate docker compose file, it's also running [here](https://immich.pingusurmars.xyz))
