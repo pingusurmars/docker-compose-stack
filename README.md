@@ -8,7 +8,7 @@ Nothing fancy, just an old pc doing the stuff I need it to do, might upgrade soo
 # Summary
 Here's a list of what's running and why (<ins>underlined</ins> = not running inside docker but could've)
 <br><br>
-**Pihole** - Layer 3 (correct me if I'm wrong) Ad Blocker, surprisingly works on Netflix and helps a ton with annoying ads<br>
+**Pihole** - Layer 3 (or Layer 7 if you prefer) Ad Blocker, surprisingly works on Netflix and helps a ton with annoying ads<br>
 **Portainer** - Makes Docker easier to manage in my opinion that in the CLI, especially on mobile where SSH isn't super convenient<br>
 **[Speedtest Tracker](https://docs.speedtest-tracker.dev/)** - Useful tool to see if my internet speed isn't too slow compared to what I normally get, not used often but cool tool<br>
 **Nginx Proxy Manager** - Way simpler than struggling with nginx config files, even tho [NGINXConfig](https://www.digitalocean.com/community/tools/nginx?global.app.lang=en) exists<br><br>
