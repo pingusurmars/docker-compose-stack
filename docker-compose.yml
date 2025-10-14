@@ -56,6 +56,13 @@ services:
     networks:
       - ctc_private
       - internet
+  watchtower:
+    image: containrrr/watchtower:latest
+    restart: unless-stopped
+    container_name: stack_watchtower
+    networks:
+      - ctc_private
+      - internet
 # THERE USED TO BE PORTAINER HERE BUT IT WAS REMOVED DUE TO IT NOT BEING ABLE TO UPDATE THE STACK VIA GIT AFTER DEPLOYING, PLEASE DEPLOY IT BEFORE MANUANLLY!!
 networks:
   # If it isn't clear enough from the config, ctc = Container to Container and private = no outside access
