@@ -57,7 +57,7 @@ services:
       - ctc_private
       - internet
   watchtower:
-    image: containrrr/watchtower:latest
+    image: nickfedor/watchtower:latest
     restart: unless-stopped
     container_name: stack_watchtower
     networks:
