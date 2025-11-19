@@ -2,7 +2,7 @@
 What I currently have deployed with docker on my home "server" (in quotation marks because it's just a repurposed old PC)
 
 # The Machine itself
-![neofetch image](https://github.com/pingusurmars/my-docker-stack/blob/master/neofetch.png?raw=true)<br>
+![neofetch and not fastfetch because who cares](https://github.com/pingusurmars/my-docker-stack/blob/master/neofetch.png?raw=true)<br>
 Nothing fancy, just an old pc doing the stuff I need it to do, might upgrade soon if I really need to (which is likely soon)
 
 # Summary
