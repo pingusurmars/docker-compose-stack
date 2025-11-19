@@ -36,6 +36,7 @@ services:
       - ./letsencrypt:/etc/letsencrypt
     networks:
       - ctc_private
+      - default
       - internet
   speedtest-tracker:
     image: lscr.io/linuxserver/speedtest-tracker:latest
