@@ -63,6 +63,8 @@ services:
     networks:
       - ctc_private
       - internet
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
   jellyfin:
     image: jellyfin/jellyfin
     container_name: jellyfin
