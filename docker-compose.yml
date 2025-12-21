@@ -2,15 +2,7 @@ services:
   pihole:
     container_name: pihole_dns
     image: pihole/pihole:latest
-    ports:
-    # DNS Server ports
-    - "53:53/tcp"
-    - "53:53/udp"
-    # Web Interface ports
-    - "8800:80/tcp"
-    - "4443:443/tcp"
-    # DHCP support
-    - "67:67/udp"
+    network_mode: host
     environment:
       TZ: 'Europe/Paris'
       FTLCONF_webserver_api_password: ${PIHOLE_ADMIN_PASSWORD} # Don't forget to set it in the .ENV!!
