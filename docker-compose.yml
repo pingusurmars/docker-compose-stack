@@ -2,15 +2,17 @@ services:
   pihole:
     container_name: pihole_dns
     image: pihole/pihole:latest
-    ports:
+    network_mode: host
+# Not necessary anymore as network is in host mode (REMEMBER TO SET FW RULES)
+#    ports:
     # DNS Server ports
-    - "53:53/tcp"
-    - "53:53/udp"
+#    - "53:53/tcp"
+#    - "53:53/udp"
     # Web Interface ports
-    - "8800:80/tcp"
-    - "4443:443/tcp"
+#    - "8800:80/tcp"
+#    - "4443:443/tcp"
     # DHCP support
-    - "67:67/udp"
+#    - "67:67/udp"
     environment:
       TZ: 'Europe/Paris'
       FTLCONF_webserver_api_password: ${PIHOLE_ADMIN_PASSWORD} # Don't forget to set it in the .ENV!!
@@ -19,9 +21,6 @@ services:
     cap_add:
       - NET_ADMIN # Needed if using the DHCP server
     restart: unless-stopped
-    networks:
-      - ctc_private
-      - internet
   nginx-proxy-manager:
     image: 'jc21/nginx-proxy-manager:latest'
     restart: unless-stopped
