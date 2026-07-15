@@ -11,7 +11,6 @@ Here's a list of what's running and why (<ins>underlined</ins> = not running ins
 **Pihole** - The one and only DNS Sinkhole, surprisingly works on Netflix and helps a ton with annoying ads<br>
 **Portainer** - Makes Docker easier to manage in my opinion that in the CLI, especially on mobile where SSH isn't super convenient<br>
 **[Speedtest Tracker](https://docs.speedtest-tracker.dev/)** - Useful tool to see if my internet speed isn't too slow compared to what I normally get, not used often but cool tool<br>
-**Nginx Proxy Manager** - Way simpler than struggling with nginx config files, even tho [NGINXConfig](https://www.digitalocean.com/community/tools/nginx?global.app.lang=en) exists<br>
 **Watchtower** - Auto-updates for containers, do I really need to explain how life changing this is?<br>
 **Jellyfin** - Basically self-hosted Netflix<br><br>
 
