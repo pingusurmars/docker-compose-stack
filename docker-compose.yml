@@ -1,3 +1,5 @@
+version: '3.8'
+
 services:
   pihole:
     container_name: pihole_dns
@@ -21,22 +23,7 @@ services:
     cap_add:
       - NET_ADMIN # Needed if using the DHCP server
     restart: unless-stopped
-  nginx-proxy-manager:
-    image: 'jc21/nginx-proxy-manager:latest'
-    restart: unless-stopped
-    ports:
-    # "NGINX" ports (it's not nginx, but you get the idea)
-      - '80:80'
-      - '443:443'
-    # Control UI
-      - '81:81'
-    volumes:
-      - ./data:/data
-      - ./letsencrypt:/etc/letsencrypt
-    networks:
-      - ctc_private
-      - default
-      - internet
+
   speedtest-tracker:
     image: lscr.io/linuxserver/speedtest-tracker:latest
     restart: unless-stopped
@@ -54,17 +41,21 @@ services:
       - /etc/speedtest-tracker/config/keys:/config/key
       - /etc/localtime:/etc/localtime
     networks:
-      - ctc_private
+      ctc_private:
+        ipv4_address: 172.21.0.11
       - internet
+
   watchtower:
     image: nickfedor/watchtower:latest
     restart: unless-stopped
     container_name: stack_watchtower
     networks:
-      - ctc_private
-      - internet
+      ctc_private:
+        ipv4_address: 172.21.0.12
+      - internet: {}
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
+
   jellyfin:
     image: jellyfin/jellyfin
     container_name: jellyfin
@@ -84,24 +75,27 @@ services:
     # Optional - may be necessary for docker healthcheck to pass if running in host network mode
     extra_hosts:
       - 'host.docker.internal:host-gateway'
+    networks:
+      ctc_private:
+        ipv4_address: 172.21.0.13
+
 # THERE USED TO BE PORTAINER HERE BUT IT WAS REMOVED DUE TO IT NOT BEING ABLE TO UPDATE THE STACK VIA GIT AFTER DEPLOYING, PLEASE DEPLOY IT BEFORE MANUANLLY!!
 networks:
   # If it isn't clear enough from the config, ctc = Container to Container and private = no outside access
-  ctc_private: 
+  ctc_private:
     driver: bridge
     attachable: false
-    enable_ipv6: true
+    enable_ipv6: false
     internal: true
     ipam:
       driver: default
       config:
-        - subnet: 172.1.0.0/16
-        - subnet: fc00:CA7:F00D::/80
+        - subnet: 172.21.0.0/16
+          gateway: 172.21.0.1
+
   internet:
     driver: bridge
     enable_ipv6: true
+
 volumes:
   portainer_data:
-
-
-      
