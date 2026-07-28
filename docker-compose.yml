@@ -1,6 +1,10 @@
-version: '3.8'
-
 services:
+  cloudflared:
+    image: cloudflare/cloudflared:latest
+    container_name: cloudflared
+    networks:
+      - tunnel_net
+    command: tunnel run --token ${TUNNEL_TOKEN}
   pihole:
     container_name: pihole_dns
     image: pihole/pihole:latest
@@ -23,7 +27,6 @@ services:
     cap_add:
       - NET_ADMIN # Needed if using the DHCP server
     restart: unless-stopped
-
   speedtest-tracker:
     image: lscr.io/linuxserver/speedtest-tracker:latest
     restart: unless-stopped
@@ -41,21 +44,17 @@ services:
       - /etc/speedtest-tracker/config/keys:/config/key
       - /etc/localtime:/etc/localtime
     networks:
-      ctc_private:
-        ipv4_address: 172.21.0.11
+      - ctc_private
       - internet
-
   watchtower:
     image: nickfedor/watchtower:latest
     restart: unless-stopped
     container_name: stack_watchtower
     networks:
-      ctc_private:
-        ipv4_address: 172.21.0.12
-      - internet: {}
+      - ctc_private
+      - internet
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
-
   jellyfin:
     image: jellyfin/jellyfin
     container_name: jellyfin
@@ -75,27 +74,13 @@ services:
     # Optional - may be necessary for docker healthcheck to pass if running in host network mode
     extra_hosts:
       - 'host.docker.internal:host-gateway'
-    networks:
-      ctc_private:
-        ipv4_address: 172.21.0.13
-
 # THERE USED TO BE PORTAINER HERE BUT IT WAS REMOVED DUE TO IT NOT BEING ABLE TO UPDATE THE STACK VIA GIT AFTER DEPLOYING, PLEASE DEPLOY IT BEFORE MANUANLLY!!
 networks:
-  # If it isn't clear enough from the config, ctc = Container to Container and private = no outside access
-  ctc_private:
-    driver: bridge
-    attachable: false
-    enable_ipv6: false
-    internal: true
-    ipam:
-      driver: default
-      config:
-        - subnet: 172.21.0.0/16
-          gateway: 172.21.0.1
-
   internet:
     driver: bridge
     enable_ipv6: true
-
 volumes:
   portainer_data:
+
+
+      
