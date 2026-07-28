@@ -44,6 +44,7 @@ services:
       - /etc/speedtest-tracker/config/keys:/config/key
       - /etc/localtime:/etc/localtime
     networks:
+      - tunnel_net
       - ctc_private
       - internet
   watchtower:
@@ -74,11 +75,15 @@ services:
     # Optional - may be necessary for docker healthcheck to pass if running in host network mode
     extra_hosts:
       - 'host.docker.internal:host-gateway'
+    networks:
+      - tunnel_net
 # THERE USED TO BE PORTAINER HERE BUT IT WAS REMOVED DUE TO IT NOT BEING ABLE TO UPDATE THE STACK VIA GIT AFTER DEPLOYING, PLEASE DEPLOY IT BEFORE MANUANLLY!!
 networks:
   internet:
     driver: bridge
     enable_ipv6: true
+  tunnel_net:
+    driver: bridge
 volumes:
   portainer_data:
 
