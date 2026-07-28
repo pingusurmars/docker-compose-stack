@@ -2,8 +2,6 @@ services:
   cloudflared:
     image: cloudflare/cloudflared:latest
     container_name: cloudflared
-    networks:
-      - tunnel_net
     command: tunnel run --token ${TUNNEL_TOKEN}
   pihole:
     container_name: pihole_dns
@@ -43,15 +41,10 @@ services:
       - /etc/speedtest-tracker/config:/config
       - /etc/speedtest-tracker/config/keys:/config/key
       - /etc/localtime:/etc/localtime
-    networks:
-      - tunnel_net
-      - internet
   watchtower:
     image: nickfedor/watchtower:latest
     restart: unless-stopped
     container_name: stack_watchtower
-    networks:
-      - internet
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
   jellyfin:
@@ -73,15 +66,7 @@ services:
     # Optional - may be necessary for docker healthcheck to pass if running in host network mode
     extra_hosts:
       - 'host.docker.internal:host-gateway'
-    networks:
-      - tunnel_net
 # THERE USED TO BE PORTAINER HERE BUT IT WAS REMOVED DUE TO IT NOT BEING ABLE TO UPDATE THE STACK VIA GIT AFTER DEPLOYING, PLEASE DEPLOY IT BEFORE MANUANLLY!!
-networks:
-  internet:
-    driver: bridge
-    enable_ipv6: true
-  tunnel_net:
-    driver: bridge
 volumes:
   portainer_data:
 
