@@ -45,14 +45,12 @@ services:
       - /etc/localtime:/etc/localtime
     networks:
       - tunnel_net
-      - ctc_private
       - internet
   watchtower:
     image: nickfedor/watchtower:latest
     restart: unless-stopped
     container_name: stack_watchtower
     networks:
-      - ctc_private
       - internet
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
